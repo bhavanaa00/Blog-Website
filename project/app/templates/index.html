@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container" style="margin-top: 50px;">
+  <div class="row">
+    <h3>Recent Blogs &rarr;</h3>
+    <!-- Blog Entries Column -->
+    <div class="col-md-8 mt-3 left">
+      {% for post in post_list %}
+      <div class="card mb-4">
+        <div class="card-body">
+          <h2 class="card-title">{{ post.title }}</h2>
+          <p class="card-text text-muted h6">{{ post.author }} | {{ post.created_on}} </p>
+          <p class="card-text">{{ post.content|slice:":200" }}</p>
+          <a href="{% url 'post_detail' post.slug  %}" class="btn" style="background-color: #eb6864; color: rgb(255, 255, 255);">continue reading &rarr;</a>
+        </div>
+      </div>
+      {% endfor %}
+      <a href="{% url 'posts' %}" class="btn align-center" style="background-color: #eb6864; color: rgb(255, 255, 255); margin-bottom: 25px; width: 100%;">All blogs &rarr;</a>
+    </div>
+    {% block sidebar %} 
+    {% include 'sidebar.html' %} 
+    {% endblock sidebar %}
+  </div>
+</div>
+{%endblock%}
